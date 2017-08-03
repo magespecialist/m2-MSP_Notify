@@ -24,7 +24,6 @@ use Magento\Framework\Registry;
 use MSP\Notify\Api\Data\EventInterface;
 use MSP\Notify\Api\EventRepositoryInterface;
 use MSP\Notify\Model\EventFactory;
-use MSP\Notify\Model\NotificationTemplateFactory;
 
 abstract class AbstractEventController extends AbstractAction
 {

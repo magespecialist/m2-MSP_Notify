@@ -18,9 +18,7 @@
 
 namespace MSP\Notify\Api;
 
-use Magento\Framework\Data\Form\Element\Fieldset;
 use MSP\Notify\Api\Data\NotificationInterface;
-use MSP\Notify\Api\Data\NotificationTemplateInterface;
 
 interface AdapterInterface
 {

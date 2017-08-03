@@ -19,14 +19,11 @@
 namespace MSP\Notify\Adapter;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Data\Form\Element\Fieldset;
-use Magento\Framework\Data\Form\Element\FieldsetFactory;
 use Magento\Framework\View\Page\FaviconInterface;
 use Maknz\Slack\Client;
 use Maknz\Slack\ClientFactory;
 use MSP\Notify\Api\AdapterInterface;
 use MSP\Notify\Api\Data\NotificationInterface;
-use MSP\Notify\Api\Data\NotificationTemplateInterface;
 
 class Slack implements AdapterInterface
 {
@@ -49,14 +46,12 @@ class Slack implements AdapterInterface
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         FaviconInterface $favicon,
-        ClientFactory $clientFactory,
-        FieldsetFactory $fieldsetFactory
+        ClientFactory $clientFactory
     ) {
     
         $this->scopeConfig = $scopeConfig;
         $this->favicon = $favicon;
         $this->clientFactory = $clientFactory;
-        $this->fieldsetFactory = $fieldsetFactory;
     }
 
     /**

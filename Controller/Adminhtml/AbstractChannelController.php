@@ -24,8 +24,6 @@ use Magento\Framework\Registry;
 use MSP\Notify\Api\ChannelRepositoryInterface;
 use MSP\Notify\Api\Data\ChannelInterface;
 use MSP\Notify\Api\Data\ChannelInterfaceFactory;
-use MSP\Notify\Model\NotificationTemplate;
-use MSP\Notify\Model\NotificationTemplateFactory;
 
 abstract class AbstractChannelController extends AbstractAction
 {

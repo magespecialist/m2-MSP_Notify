@@ -2,7 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
   <preference for="MSP\Notify\Api\NotificatorInterface" type="MSP\Notify\Base\Notificator"/>
   <preference for="MSP\Notify\Api\AdapterRepositoryInterface" type="MSP\Notify\Base\AdapterList"/>
-  <preference for="MSP\Notify\Api\Data\NotificationTemplateInterface" type="MSP\Notify\Model\NotificationTemplate"/>
   <preference for="MSP\Notify\Api\Data\NotificationInterface" type="MSP\Notify\Model\Notification"/>
   <preference for="MSP\Notify\Api\NotificationRepositoryInterface" type="MSP\Notify\Model\NotificationRepository"/>
   <preference for="\MSP\Notify\Api\Data\ChannelInterface" type="\MSP\Notify\Model\Channel"/>

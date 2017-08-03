@@ -18,11 +18,8 @@
 
 namespace MSP\Notify\Adapter;
 
-use Magento\Framework\Data\Form\Element\Fieldset;
-use Magento\Framework\Data\Form\Element\FieldsetFactory;
 use MSP\Notify\Api\AdapterInterface;
 use MSP\Notify\Api\Data\NotificationInterface;
-use MSP\Notify\Api\Data\NotificationTemplateInterface;
 use Telegram\Bot\Api;
 use Telegram\Bot\ApiFactory;
 
@@ -36,15 +33,12 @@ class Telegram implements AdapterInterface
     protected $client;
 
     protected $telegramFactory;
-    protected $fieldsetFactory;
 
     public function __construct(
-        ApiFactory $telegramFactory,
-        FieldsetFactory $fieldsetFactory
+        ApiFactory $telegramFactory
     ) {
     
         $this->telegramFactory = $telegramFactory;
-        $this->fieldsetFactory = $fieldsetFactory;
     }
 
     /**
