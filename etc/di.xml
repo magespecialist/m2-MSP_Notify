@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  <preference for="MSP\Notify\Api\NotificatorInterface" type="MSP\Notify\Base\Notificator"/>
+  <preference for="MSP\Notify\Api\AdapterRepositoryInterface" type="MSP\Notify\Base\AdapterList"/>
+  <preference for="MSP\Notify\Api\Data\NotificationTemplateInterface" type="MSP\Notify\Model\NotificationTemplate"/>
+  <preference for="MSP\Notify\Api\Data\NotificationInterface" type="MSP\Notify\Model\Notification"/>
+  <preference for="MSP\Notify\Api\NotificationRepositoryInterface" type="MSP\Notify\Model\NotificationRepository"/>
+  <preference for="\MSP\Notify\Api\Data\ChannelInterface" type="\MSP\Notify\Model\Channel"/>
+  <preference for="\MSP\Notify\Api\ChannelRepositoryInterface" type="\MSP\Notify\Model\ChannelRepository"/>
+  <preference for="\MSP\Notify\Api\Data\ChannelSearchResultsInterface" type="\Magento\Framework\Api\SearchResults"/>
+  <preference for="\MSP\Notify\Api\Data\EventInterface" type="\MSP\Notify\Model\Event"/>
+  <preference for="\MSP\Notify\Api\EventRepositoryInterface" type="\MSP\Notify\Model\EventRepository"/>
+  <preference for="\MSP\Notify\Api\Data\EventSearchResultsInterface" type="\Magento\Framework\Api\SearchResults"/>
+
+  <type name="\MSP\Notify\Base\AdapterList">
+    <arguments>
+      <argument name="adapters" xsi:type="array">
+        <item name="slack" xsi:type="object">MSP\Notify\Adapter\Slack</item>
+        <item name="telegram" xsi:type="object">MSP\Notify\Adapter\Telegram</item>
+        <item name="email" xsi:type="object">MSP\Notify\Adapter\Email</item>
+      </argument>
+    </arguments>
+  </type>
+
+  <type name="Magento\Framework\Event\ManagerInterface">
+    <plugin sortOrder="1" name="MSPNotifyManagerInterface" type="MSP\Notify\Plugin\Event\ManagerInterfacePlugin"/>
+  </type>
+
+  <virtualType name="reader" type="Magento\Framework\Config\Reader\Filesystem">
+    <arguments>
+      <argument name="fileName" xsi:type="string">notification_templates.xml</argument>
+      <argument name="converter" xsi:type="object">MSP\Notify\Model\Template\Config\Converter</argument>
+      <argument name="schemaLocator" xsi:type="object">MSP\Notify\Model\Template\Config\SchemaLocator</argument>
+      <argument name="idAttributes" xsi:type="array">
+        <item name="/config/templates/template" xsi:type="string">id</item>
+      </argument>
+    </arguments>
+  </virtualType>
+
+  <type name="MSP\Notify\Model\Notification">
+    <arguments>
+      <argument name="reader" xsi:type="object">reader</argument>
+    </arguments>
+  </type>
+  <type name="Magento\Framework\Console\CommandList">
+    <arguments>
+      <argument name="commands" xsi:type="array">
+        <item name="msp_notify_test" xsi:type="object">MSP\Notify\Console\TestCommand</item>
+        <item name="msp_run_cron" xsi:type="object">MSP\Notify\Console\RunQueueCommand</item>
+      </argument>
+    </arguments>
+  </type>
+
+  <type name="Magento\Developer\Model\TemplateEngine\Plugin\DebugHints">
+    <arguments>
+      <argument name="debugHintsPath" xsi:type="string">-</argument>
+    </arguments>
+  </type>
+
+  <!-- Channel grid -->
+  <virtualType name="MspNotifyChannelDataProvider"
+               type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+    <arguments>
+      <argument name="collection" xsi:type="object" shared="false">MSP\Notify\Model\ResourceModel\Channel\Collection</argument>
+      <argument name="filterPool" xsi:type="object" shared="false">MspNotifyChannelFilterPool</argument>
+    </arguments>
+  </virtualType>
+
+  <virtualType name="MspNotifyChannelFilterPool"
+               type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+    <arguments>
+      <argument name="appliers" xsi:type="array">
+        <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+        <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+      </argument>
+    </arguments>
+  </virtualType>
+
+  <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+    <arguments>
+      <argument name="collections" xsi:type="array">
+        <item name="msp_notify_channel_data_source" xsi:type="string">MSP\Notify\Model\ResourceModel\UI\Channel\Collection</item>
+      </argument>
+    </arguments>
+  </type>
+
+  <virtualType name="MSP\Notify\Model\ResourceModel\UI\Channel\Collection"
+               type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <arguments>
+      <argument name="mainTable" xsi:type="string">msp_notify_channel</argument>
+      <argument name="resourceModel" xsi:type="string">MSP\Notify\Model\ResourceModel\Channel\Collection</argument>
+    </arguments>
+  </virtualType>
+
+  <!-- event grid -->
+  <virtualType name="MspNotifyEventDataProvider"
+               type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+    <arguments>
+      <argument name="collection" xsi:type="object" shared="false">MSP\Notify\Model\ResourceModel\Event\Collection</argument>
+      <argument name="filterPool" xsi:type="object" shared="false">MspNotifyEventFilterPool</argument>
+    </arguments>
+  </virtualType>
+
+  <virtualType name="MspNotifyEventFilterPool"
+               type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+    <arguments>
+      <argument name="appliers" xsi:type="array">
+        <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+        <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+      </argument>
+    </arguments>
+  </virtualType>
+
+  <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+    <arguments>
+      <argument name="collections" xsi:type="array">
+        <item name="msp_notify_event_data_source" xsi:type="string">MSP\Notify\Model\ResourceModel\UI\Event\Collection</item>
+      </argument>
+    </arguments>
+  </type>
+
+  <virtualType name="MSP\Notify\Model\ResourceModel\UI\Event\Collection"
+               type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <arguments>
+      <argument name="mainTable" xsi:type="string">msp_notify_event</argument>
+      <argument name="resourceModel" xsi:type="string">MSP\Notify\Model\ResourceModel\Event\Collection</argument>
+    </arguments>
+  </virtualType>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MSP_Notify::configuration" title="MSP Notify" translate="title" module="MSP_Notify" parent="Magento_Backend::system_other_settings" sortOrder="10" resource="MSP_Notify::configuration"/>
+        <add id="MSP_Notify::channels" title="Configure Channels" translate="title" module="MSP_Notify" sortOrder="90"
+             parent="MSP_Notify::configuration" action="adminhtml/channel"
+             resource="MSP_Notify::configuration"/>
+        <add id="MSP_Notify::events" title="Configure Events" translate="title" module="MSP_Notify" sortOrder="90"
+             parent="MSP_Notify::configuration" action="adminhtml/event"
+             resource="MSP_Notify::configuration"/>
+    </menu>
+</config>
