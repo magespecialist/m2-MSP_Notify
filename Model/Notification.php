@@ -123,7 +123,7 @@ class Notification extends AbstractModel implements NotificationInterface
         $template = $this->reader->read();
 
         if (isset($template[$this->getEvent()])) {
-            return $template;
+            return $template[$this->getEvent()];
         } else {
             return $template['default'];
         }

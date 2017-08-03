@@ -55,6 +55,9 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if (version_compare($context->getVersion(), '1.1.0', '<')) {
             $this->upgradeTo110($setup);
         }
+        if (version_compare($context->getVersion(), '1.1.1', '<')) {
+            $this->upgradeTo111($setup);
+        }
     }
 
     protected function upgradeTo020(SchemaSetupInterface $setup)
@@ -286,5 +289,16 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $conn->dropColumn($notificationTable, 'channel_id');
         $conn->dropColumn($notificationTable, 'adapter_code');
         $conn->dropColumn($notificationTable, 'adapter_configuration');
+    }
+
+    protected function upgradeto111(SchemaSetupInterface $setup)
+    {
+        $conn = $setup->getConnection();
+        $notificationTable = $conn->getTableName('msp_notify_notification');
+
+        $conn->dropForeignKey(
+            $notificationTable,
+            $setup->getFkName('msp_notify_notification', 'template_id', 'msp_notify_template', 'msp_notify_template_id')
+        );
     }
 }
