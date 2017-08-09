@@ -180,7 +180,7 @@ class Notification extends AbstractModel implements NotificationInterface
     public function getChannel()
     {
         $event = $this->getEventObject();
-        $channel = $this->channelRepository->getById($event->getId());
+        $channel = $this->channelRepository->getById($event->getChannelId());
 
         return $channel;
     }
