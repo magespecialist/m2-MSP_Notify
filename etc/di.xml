@@ -25,7 +25,7 @@
     <plugin sortOrder="1" name="MSPNotifyManagerInterface" type="MSP\Notify\Plugin\Event\ManagerInterfacePlugin"/>
   </type>
 
-  <virtualType name="reader" type="Magento\Framework\Config\Reader\Filesystem">
+	<virtualType name="MSP/Notify/Config/Reader" type="Magento\Framework\Config\Reader\Filesystem">
     <arguments>
       <argument name="fileName" xsi:type="string">notification_templates.xml</argument>
       <argument name="converter" xsi:type="object">MSP\Notify\Model\Template\Config\Converter</argument>
@@ -38,7 +38,7 @@
 
   <type name="MSP\Notify\Model\Notification">
     <arguments>
-      <argument name="reader" xsi:type="object">reader</argument>
+      <argument name="reader" xsi:type="object">MSP/Notify/Config/Reader</argument>
     </arguments>
   </type>
   <type name="Magento\Framework\Console\CommandList">
