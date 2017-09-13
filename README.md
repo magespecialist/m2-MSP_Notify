@@ -54,14 +54,13 @@ Example content for that file:
 </config>
 ```
 
-Your template must be placed under `view/adminhtml/templates` and should be something like:
+Your template must be placed under `msp_notify` (e.g.: `app/code/Vendor/Module/msp_notify/myevent.phtml`) and should be something like:
 
 ```
 <?php
 $observedObject = $block->getObject();
 
 echo __("Object %1 has been processed", $observedObject->getName());
-?>
 ```
 
 Optionally in the xml file you can specify a custom Block instead of the default one.
@@ -96,8 +95,23 @@ Telegram
 --------
 
 1. To use telegram you need to get a bot token from the [BotFather](https://telegram.me/botfather).
-2. Then you need to know the chat id of the [group](https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id) or the [single user](https://stackoverflow.com/questions/31078710/how-to-obtain-telegram-chat-id-for-a-specific-user)
+    - Open your telegram app
+    - Search for  [BotFather](https://telegram.me/BotFather) user
+    - Start a new chat
+    - Type: `/newbot`
+    - Follow the instructions.
+    - At the end you will get an HTTP API token. Copy and paste this token to your token field.
+2. Then you need to know the chat id:
+    - Open your telegram app
+    - Search for  [get_id_bot](https://telegram.me/get_id_bot) user
+    - Start a new chat
+    - Type: `/my_id`
+    - Copy the resulting value in your `Chat Id` field
 
+The same procedure can be applied for a Telegram group by temporary adding the `get_id_bot` as group member.
+After you get the Chat ID you should remove it.
+
+     
 Email
 -----
 

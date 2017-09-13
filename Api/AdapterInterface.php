@@ -22,6 +22,7 @@ use MSP\Notify\Api\Data\NotificationInterface;
 
 interface AdapterInterface
 {
+    const TEMPLATE_MODULE_DIR = 'msp_notify';
 
     /**
      * Adapter name to be showed on admin list

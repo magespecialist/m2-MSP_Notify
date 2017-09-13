@@ -22,6 +22,5 @@ use MSP\Notify\Api\Data\NotificationInterface;
 
 interface NotificatorInterface
 {
-
     public function enqueue(NotificationInterface $notification);
 }

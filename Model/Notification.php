@@ -111,10 +111,11 @@ class Notification extends AbstractModel implements NotificationInterface
     public function prepareMessage($object = null)
     {
         $template = $this->getTemplateDataFromConfig();
-        $block = $this->templateFactory->create();
-        $block->setTemplate($template['file']);
-        $block->setObject($object);
-        $block->setEvent($this->getEvent());
+        $block = $this->templateFactory->create([
+            'template' => $template['file'],
+            'event' => $this->getEvent(),
+            'object' => $object,
+        ]);
         $this->setData('message', $block->toHtml());
     }
 

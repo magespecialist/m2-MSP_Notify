@@ -81,10 +81,15 @@ class Telegram implements AdapterInterface
 
     /**
      * Performs actual notification
+     * @param NotificationInterface $notification
      * @return bool true on success, false otherwise
      */
     public function notify(NotificationInterface $notification)
     {
+        if (!$notification->getMessage()) {
+            return true;
+        }
+
         $params = $notification->getChannelConfiguration();
 
         $client = $this->createClient($params['token']);
