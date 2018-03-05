@@ -1,3 +1,5 @@
+<strong> WARNING: This module has been superseeded by MSP_Notifier, it will not be maintained anymore. Unless you are using Magento &lt;= 2.1 consider switch to the new and improved version.</strong>
+
 MSP Notify
 ==========
 

@@ -19,13 +19,12 @@
 	],
 	"require": {
 		"php": "~7.0.0",
-
-		"magento/magento-composer-installer": "*",
+		"magento/framework": "<100.2",
 		"maknz/slack": "^1.7",
 		"irazasyed/telegram-bot-sdk": "^2.0"
 	},
 	"suggest": {
-
+		"msp/notifier": "Improved version with more functionalities"
 	},
 	"type": "magento2-module",
 	"autoload": {
