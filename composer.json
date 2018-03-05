@@ -1,7 +1,7 @@
 {
 	"name": "msp/notify",
 	"description": "Magento 2 multi channel notification module",
-	"license": "OSL 3.0",
+	"license": "OSL-3.0",
 	"support": {
 		"issues": "https://github.com/magespecialist/m2-MSP_Notify/issues"
 	},
