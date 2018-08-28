@@ -18,7 +18,7 @@
 		}
 	],
 	"require": {
-		"php": "~7.0.0",
+		"php": "~7.0.0|~7.1.0",
 		"magento/framework": "<100.2",
 		"maknz/slack": "^1.7",
 		"irazasyed/telegram-bot-sdk": "^2.0"
